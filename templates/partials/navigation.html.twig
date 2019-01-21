@@ -1,0 +1,30 @@
+{% macro loop(page) %}
+  {% for p in page.children %}
+    {% if p.visible and p.children.count > 0 and p.folder != '02.svedeniya-ob-oo' %}
+        <li class="nav-item hs-has-sub-menu  g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn" data-animation-out="fadeOut">
+            <a id="nav-link--features" class="nav-link g-py-7 g-px-0" href="{{ p.url }}" aria-haspopup="true" aria-expanded="false" aria-controls="nav-submenu--features">{{ p.menu }}</a>
+
+            <ul class="hs-sub-menu list-unstyled u-shadow-v11 g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-mt-18 g-mt-8--lg--scrolling" id="nav-submenu--features" aria-labelledby="nav-link--features">
+            {% for pc in p.children %}
+                    <li class="dropdown-item ">
+                        <a class="nav-link" href="{{ pc.url }}">{{ pc.menu }}</a>
+                    </li>
+            {% endfor %}
+            </ul>
+
+
+        </li>
+
+    {% else %}
+        {% if p.visible %}
+        <li class="nav-item  g-mx-10--lg g-mx-15--xl">
+            <a href="{{ p.url }}" class="nav-link g-py-7 g-px-0">{{ p.menu }}</a>
+        </li>
+        {% endif %}
+    {% endif %}
+
+  {% endfor %}
+{% endmacro %}
+
+
+{{ _self.loop(pages) }}

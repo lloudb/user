@@ -1,0 +1,41 @@
+
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+  <div class="container g-py-25">
+    <div class="row">
+      {% if not page.parent.root() %}
+      <div class="col-md-9" >
+        {{ page.content }}
+      </div>
+      <div class="col-md-3 u-shadow-v4 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40 g-mb-30 h-auto" role="alert">
+        <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
+          {% for p in page.parent.children %}
+          <li class="nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn" data-animation-out="fadeOut">
+            <a class="nav-link g-py-7 g-px-0 g-color-green--hover" href="{{ p.url }}">{{ p.menu }}</a>
+          {% endfor %}
+        </ul>
+      </div>
+      {% elseif page.children.count > 0 %}
+      <div class="col-md-9">
+        {{ page.content }}
+      </div>
+      <div class="col-md-3 u-shadow-v4 g-bg-white g-brd-around g-brd-gray-light-v4 g-line-height-2 g-pa-40 g-mb-30" role="alert">
+        <ul class="navbar-nav text-uppercase g-pos-rel g-font-weight-600 ml-auto">
+          {% for p in page.children %}
+          <li class="nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn" data-animation-out="fadeOut">
+            <a class="nav-link g-py-7 g-px-0 g-color-green--hover" href="{{ p.url }}">{{ p.menu }}</a>
+            {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <div class="container">
+        {{ page.content }}
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+  <!-- End Box Shadow -->
+{% endblock %}
